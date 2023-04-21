@@ -1,4 +1,4 @@
-#include <iostream>
+п»ї#include <iostream>
 #include <string>
 using namespace std;
 
@@ -29,7 +29,7 @@ private:
 int main()
 {
 	setlocale(LC_ALL, "Rus");
-	Fraction fr1(0, 1, 5);  //Умножение
+	Fraction fr1(0, 1, 5);  //РЈРјРЅРѕР¶РµРЅРёРµ
 	Fraction fr2(0, 5, 1);
 
 	Fraction fr3(4, 0, 0);
@@ -38,7 +38,7 @@ int main()
 	Fraction fr5(0, 21, 30);
 	Fraction fr6(0, 5 , 15);
 
-	Fraction fr7(2, 0, 0);   //Деление
+	Fraction fr7(2, 0, 0);   //Р”РµР»РµРЅРёРµ
 	Fraction fr8(0, 1, 2);
 
 	Fraction fr9(0, 1, 2);
@@ -47,7 +47,7 @@ int main()
 	Fraction fr11(0, 5, 7);
 	Fraction fr12(0, 3, 5);
 
-	Fraction fr13(0, 2, 3);  //Сложение
+	Fraction fr13(0, 2, 3);  //РЎР»РѕР¶РµРЅРёРµ
 	Fraction fr14(0, 1, 2);
 
 	Fraction fr15(0, 5, 1);
@@ -56,7 +56,7 @@ int main()
 	Fraction fr17(0, 2, 3);
 	Fraction fr18(0, 1, 2);
 
-	Fraction fr19(0, 3, 4);  //Вычитание
+	Fraction fr19(0, 3, 4);  //Р’С‹С‡РёС‚Р°РЅРёРµ
 	Fraction fr20(0, 1, 4);
 
 	Fraction fr21(0, 13, 7);
@@ -131,9 +131,9 @@ Fraction::Fraction(const Fraction & other)
 
 void Fraction::GetIntDenNum() const
 {
-	cout << "Целое число равно: " <<this->integ << endl;
-	cout << "Знаменатель равен: " <<this->den << endl;
-	cout << "Числитель равен  : " <<this->numer << endl;
+	cout << "Р¦РµР»РѕРµ С‡РёСЃР»Рѕ СЂР°РІРЅРѕ: " <<this->integ << endl;
+	cout << "Р—РЅР°РјРµРЅР°С‚РµР»СЊ СЂР°РІРµРЅ: " <<this->den << endl;
+	cout << "Р§РёСЃР»РёС‚РµР»СЊ СЂР°РІРµРЅ  : " <<this->numer << endl;
 }
 
 void Fraction::SetIntDenNum(int integ,int den,int numer)
@@ -198,7 +198,7 @@ Fraction& Fraction :: operator =(const Fraction& other)
 Fraction Fraction :: operator +(const Fraction& other)
 {
 	Fraction temp;
-	if (this->integ != 0 || other.integ != 0)        // Cмешанные числа
+	if (this->integ != 0 || other.integ != 0)        // CРјРµС€Р°РЅРЅС‹Рµ С‡РёСЃР»Р°
 	{
 		if (this->numer == other.numer)
 		{
@@ -206,14 +206,14 @@ Fraction Fraction :: operator +(const Fraction& other)
 			temp.den = this->den + other.den;
 			temp.numer = this->numer;
 		}
-		if (this->den == 0 || this->numer == 0)     //сложение целых чисел и правильной дроби
+		if (this->den == 0 || this->numer == 0)     //СЃР»РѕР¶РµРЅРёРµ С†РµР»С‹С… С‡РёСЃРµР» Рё РїСЂР°РІРёР»СЊРЅРѕР№ РґСЂРѕР±Рё
 		{
 			temp.integ = this->integ;
 			temp.den = other.den;
 			temp.numer = other.numer;
 		}
 
-		if (this->den == 0 && this->numer == 0)    //cложение целого и смешанного числа
+		if (this->den == 0 && this->numer == 0)    //cР»РѕР¶РµРЅРёРµ С†РµР»РѕРіРѕ Рё СЃРјРµС€Р°РЅРЅРѕРіРѕ С‡РёСЃР»Р°
 		{
 			temp.integ = this->integ + other.integ;
 			temp.den = other.den;
@@ -222,22 +222,22 @@ Fraction Fraction :: operator +(const Fraction& other)
 
 		if (this->integ != 0 && other.integ != 0)
 		{
-			temp.integ = this->integ + other.integ; //сложение смешанных чисел
+			temp.integ = this->integ + other.integ; //СЃР»РѕР¶РµРЅРёРµ СЃРјРµС€Р°РЅРЅС‹С… С‡РёСЃРµР»
 			temp.den = ((this->den * other.numer) + (this->numer * other.den));
 			temp.numer = (this->numer * other.numer);
 		}
 	}
 
 
-	if (this->integ == 0 && other.integ == 0)         //Действия с дробями
+	if (this->integ == 0 && other.integ == 0)         //Р”РµР№СЃС‚РІРёСЏ СЃ РґСЂРѕР±СЏРјРё
 	{
-		if (this->numer == other.numer)               // Сложение дробей с одинаковыми знаменателями
+		if (this->numer == other.numer)               // РЎР»РѕР¶РµРЅРёРµ РґСЂРѕР±РµР№ СЃ РѕРґРёРЅР°РєРѕРІС‹РјРё Р·РЅР°РјРµРЅР°С‚РµР»СЏРјРё
 		{
 			temp.den = this->den + other.den;
 			temp.numer = this->numer;
 		}
 
-		if (this->numer!=other.numer)                  // Сложение дробей с разными знаменателями
+		if (this->numer!=other.numer)                  // РЎР»РѕР¶РµРЅРёРµ РґСЂРѕР±РµР№ СЃ СЂР°Р·РЅС‹РјРё Р·РЅР°РјРµРЅР°С‚РµР»СЏРјРё
 		{
 			temp.den = ((this->den * other.numer) + (this->numer * other.den));
 		    temp.numer = (this->numer * other.numer);
@@ -251,7 +251,7 @@ Fraction Fraction :: operator +(const Fraction& other)
 Fraction Fraction :: operator -(const Fraction& other)
 {
 	Fraction temp;
-	if (this->integ != 0 || other.integ != 0)        // Cмешанные числа
+	if (this->integ != 0 || other.integ != 0)        // CРјРµС€Р°РЅРЅС‹Рµ С‡РёСЃР»Р°
 	{
 		if (this->numer == other.numer)
 		{
@@ -259,14 +259,14 @@ Fraction Fraction :: operator -(const Fraction& other)
 			temp.den = this->den - other.den;
 			temp.numer = this->numer;
 		}
-		if (this->den == 0 || this->numer == 0)       //вычитание целых чисел и правильной дроби
+		if (this->den == 0 || this->numer == 0)       //РІС‹С‡РёС‚Р°РЅРёРµ С†РµР»С‹С… С‡РёСЃРµР» Рё РїСЂР°РІРёР»СЊРЅРѕР№ РґСЂРѕР±Рё
 		{
 			temp.integ = this->integ;
 			temp.den = other.den;
 			temp.numer = other.numer;
 		}
 
-		if (this->den == 0 && this->numer == 0)       //вычитание целого и смешанного числа
+		if (this->den == 0 && this->numer == 0)       //РІС‹С‡РёС‚Р°РЅРёРµ С†РµР»РѕРіРѕ Рё СЃРјРµС€Р°РЅРЅРѕРіРѕ С‡РёСЃР»Р°
 		{
 			temp.integ = this->integ + other.integ;
 			temp.den = other.den;
@@ -275,22 +275,22 @@ Fraction Fraction :: operator -(const Fraction& other)
 
 		if (this->integ != 0 && other.integ != 0)
 		{
-			temp.integ = this->integ - other.integ;   //вычитание смешанных чисел
+			temp.integ = this->integ - other.integ;   //РІС‹С‡РёС‚Р°РЅРёРµ СЃРјРµС€Р°РЅРЅС‹С… С‡РёСЃРµР»
 			temp.den = ((this->den * other.numer) - (this->numer * other.den));
 			temp.numer = (this->numer * other.numer);
 		}
 	}
 
 
-	if (this->integ == 0 && other.integ == 0)         //Действия с дробями
+	if (this->integ == 0 && other.integ == 0)         //Р”РµР№СЃС‚РІРёСЏ СЃ РґСЂРѕР±СЏРјРё
 	{
-		if (this->numer == other.numer)               // Вычитание дробей с одинаковыми знаменателями
+		if (this->numer == other.numer)               // Р’С‹С‡РёС‚Р°РЅРёРµ РґСЂРѕР±РµР№ СЃ РѕРґРёРЅР°РєРѕРІС‹РјРё Р·РЅР°РјРµРЅР°С‚РµР»СЏРјРё
 		{
 			temp.den = this->den - other.den;
 			temp.numer = this->numer;
 		}
 
-		if (this->numer != other.numer)               // Вычиатние дробей с разными знаменателями
+		if (this->numer != other.numer)               // Р’С‹С‡РёР°С‚РЅРёРµ РґСЂРѕР±РµР№ СЃ СЂР°Р·РЅС‹РјРё Р·РЅР°РјРµРЅР°С‚РµР»СЏРјРё
 		{
 			if (other.numer % this->numer)
 			{
@@ -317,9 +317,9 @@ Fraction Fraction :: operator -(const Fraction& other)
 Fraction Fraction :: operator /(const Fraction& other)
 {
 	Fraction temp;
-	if (this->integ != 0 || other.integ != 0)        //Cмешанные числа
+	if (this->integ != 0 || other.integ != 0)        //CРјРµС€Р°РЅРЅС‹Рµ С‡РёСЃР»Р°
 	{
-		if (this->integ != 0 && other.integ == 0)    //Умножение дроби на число
+		if (this->integ != 0 && other.integ == 0)    //РЈРјРЅРѕР¶РµРЅРёРµ РґСЂРѕР±Рё РЅР° С‡РёСЃР»Рѕ
 		{
 			temp.den = this->integ * other.numer;
 			temp.numer = other.den;
@@ -338,15 +338,15 @@ Fraction Fraction :: operator /(const Fraction& other)
 Fraction Fraction :: operator *(const Fraction& other)
 {
 	Fraction temp;
-	if (this->integ != 0 || other.integ != 0)        //Cмешанные числа
+	if (this->integ != 0 || other.integ != 0)        //CРјРµС€Р°РЅРЅС‹Рµ С‡РёСЃР»Р°
 	{
-		if (this->integ == 0 && other.integ != 0)    //Умножение дроби на число
+		if (this->integ == 0 && other.integ != 0)    //РЈРјРЅРѕР¶РµРЅРёРµ РґСЂРѕР±Рё РЅР° С‡РёСЃР»Рѕ
 		{
 			temp.den = this->den * other.integ;
 			temp.numer = this->numer;
 		}
 
-		if (this->integ != 0 && other.integ == 0)    //Умножение дроби на число
+		if (this->integ != 0 && other.integ == 0)    //РЈРјРЅРѕР¶РµРЅРёРµ РґСЂРѕР±Рё РЅР° С‡РёСЃР»Рѕ
 		{
 			temp.den = this->integ * other.den;
 			temp.numer = other.numer;
