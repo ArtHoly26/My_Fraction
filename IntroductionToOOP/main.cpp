@@ -1,6 +1,21 @@
 ﻿#include <iostream>
-#include <string>
 using namespace std;
+
+
+
+class Fraction;
+Fraction operator *(Fraction left, Fraction right);
+Fraction operator /(const Fraction left, const Fraction right);
+Fraction operator +(Fraction left, Fraction right);
+Fraction operator -(Fraction left, Fraction right);
+bool operator ==(Fraction left, Fraction right);
+bool operator !=(Fraction left, Fraction right);
+bool operator >(Fraction left, Fraction right);
+bool operator <(Fraction left, Fraction right);
+bool operator >=(Fraction left, Fraction right);
+bool operator <=(Fraction left, Fraction right);
+std::ostream& operator<<(std::ostream& os, const Fraction obj);
+std::istream& operator>>(std::istream& is,Fraction &obj);
 
 class Fraction
 {
@@ -8,356 +23,425 @@ public:
 
 	Fraction();
 	Fraction(int integ);
-	Fraction(int den, int numer);
-	Fraction(int integ, int den, int numer);
+	Fraction(int numer, int den);
+	Fraction(int integ, int numer, int den);
 	Fraction(const Fraction& other);
-	void GetIntDenNum() const;
-	void SetIntDenNum(int integ,int den,int num);
-	Fraction& Transformation();
+	int Get_integ()const;
+	int Get_den()const;
+	int Get_numer()const;
+	void Set_integ (int integ);
+	void Set_numer (int numer);
+	void Set_den(int den);
+	void Print()const;
+	Fraction& to_improper();   
+	Fraction& to_proper();     
+	Fraction& reduce();        
+	Fraction  inverted()const; 
+	
 	Fraction& operator =(const Fraction& other);
-	Fraction operator +(const Fraction& other);
-	Fraction operator -(const Fraction& other);
-	Fraction operator /(const Fraction& other);
-	Fraction operator *(const Fraction& other);
+	Fraction& operator *= (const Fraction& other);
+	Fraction& operator /= (const Fraction& other);
+	Fraction& operator +=(const Fraction& other);
+	Fraction& operator -=(const Fraction& other);
+
+	Fraction& operator ++();
+	Fraction  operator ++(int);
+	Fraction& operator --();
+	Fraction  operator --(int);
 
 private:
+	int integ;
 	int numer;
 	int den;
-	int integ;
 };
 
 int main()
 {
 	setlocale(LC_ALL, "Rus");
-	Fraction fr1(0, 1, 5);  //Умножение
-	Fraction fr2(0, 5, 1);
-
-	Fraction fr3(4, 0, 0);
-	Fraction fr4(0, 3, 4);
-
-	Fraction fr5(0, 21, 30);
-	Fraction fr6(0, 5 , 15);
-
-	Fraction fr7(2, 0, 0);   //Деление
-	Fraction fr8(0, 1, 2);
-
-	Fraction fr9(0, 1, 2);
-	Fraction fr10(0, 1, 4);
-
-	Fraction fr11(0, 5, 7);
-	Fraction fr12(0, 3, 5);
-
-	Fraction fr13(0, 2, 3);  //Сложение
-	Fraction fr14(0, 1, 2);
-
-	Fraction fr15(0, 5, 1);
-	Fraction fr16(0, 1 ,5);
-
-	Fraction fr17(0, 2, 3);
-	Fraction fr18(0, 1, 2);
-
-	Fraction fr19(0, 3, 4);  //Вычитание
-	Fraction fr20(0, 1, 4);
-
-	Fraction fr21(0, 13, 7);
-	Fraction fr22(0, 3, 7);
-
-	Fraction fr23(0, 2, 3);
-	Fraction fr24(0, 1, 4);
-
-	Fraction fr01 = fr1 * fr2;
-	Fraction fr02 = fr3 * fr4;
-	Fraction fr03 = fr5 * fr6;
-
-	Fraction fr04 = fr7 / fr8;
-	Fraction fr05 = fr9 / fr10;
-	Fraction fr06 = fr11 / fr12;
-
-	Fraction fr07 = fr13 + fr14;
-	Fraction fr08 = fr15 + fr16;
-	Fraction fr09 = fr17 + fr18;
-
-	Fraction fr010 = fr19 - fr20;
-	Fraction fr011 = fr21 - fr22;
-	Fraction fr012 = fr23 - fr24;
-	
-	fr07.GetIntDenNum();
-	fr07.Transformation();
-	fr07.GetIntDenNum();
-	cout << "------------" << endl;
-	fr08.GetIntDenNum();
-	fr08.Transformation();
-	fr08.GetIntDenNum();
-	cout << "------------" << endl;
-	fr09.GetIntDenNum();
-	fr09.Transformation();
-	fr09.GetIntDenNum();
-	cout << "------------" << endl;
-	
+	cout << "Арифметические операторы:" << endl;
+	Fraction A{ 5, 1, 5 };
+	Fraction B{ 3, 2, 7 };
+	Fraction C{ 2, 2, 3 };
+	Fraction D{ 5, 3, 5 };
+	Fraction R{ 5, 3, 5 };
+	Fraction U;
+	Fraction E = A + B;
+	cout << "Операция +" << endl;
+	E.Print();
+	Fraction F = D - C;
+	cout << "Операция -" << endl;
+	F.Print();
+	Fraction H = A * B;
+	cout << "Операция *" << endl;
+	H.Print();
+	Fraction L = D / C;
+	cout << "Операция /" << endl;
+	L.Print();
+	cout << "Операторы присваивания: " << endl;
+	cout << "Операция =" << endl;
+	Fraction M = D;
+	M.Print();
+	cout << "Операция *=" << endl;
+	M *= D;
+	M.Print();
+	cout << "Операция /=" << endl;
+	M /= D;
+	M.Print();
+	cout << "Операция +=" << endl;
+	M += D;
+	M.Print();
+	cout << "Операция -=" << endl;
+	M -= D;
+	M.Print();
+	cout << "Increment / Decrement(++ / --)" << endl;
+	for (Fraction i{ 1,2,5}; i < 10; i++) cout << i << "\t";
+	cout << endl;
+	for (Fraction i{ 1,2,5}; i < 10; ++i) cout << i << "\t";
+	cout << endl;
+	for (Fraction i{ 10,2,5 }; i > 0; i--) cout << i << "\t";
+	cout << endl;
+	for (Fraction i{ 10,2,5 }; i > 0; --i) cout << i << "\t";
+	cout << endl;
+	cout << "Операторы сравнения: " << endl;
+	cout << "Оператор ==" << endl;
+	bool check1 = D == R;
+	cout << check1;
+	cout << endl;
+	bool check2 = A == B;
+	cout << check2;
+	cout << endl;
+	cout << "Оператор !=" << endl;
+	bool check3 = D != R;
+	cout << check3;
+	cout << endl;
+	bool check4 = A != B;
+	cout << check4;
+	cout << endl;
+	cout << "Оператор >" << endl;
+	bool check5 = A > B;
+	cout << check5;
+	cout << endl;
+	bool check6 = B > A;
+	cout << check6;
+	cout << endl;
+	cout << "Оператор <" << endl;
+	bool check7 = B < A;
+	cout << check7;
+	cout << endl;
+	bool check8 = A < B;
+	cout << check8;
+	cout << endl;
+	cout << "Оператор >=" << endl;
+	bool check9 = D >= R;
+	cout << check9;
+	cout << endl;
+	bool check10 = A >= B;
+	cout << check10;
+	cout << endl;
+	bool check11 = B >= A;
+	cout << check11;
+	cout << endl;
+	cout << "Оператор <=" << endl;
+	bool check12 = D <= R;
+	cout << check12;
+	cout << endl;
+	bool check13 = A <= B;
+	cout << check13;
+	cout << endl;
+	bool check14 = B <= A;
+	cout << check14;
+	cout << endl;
+	cout << "Оператор >> <<" << endl;
+	cout << "Введите дробь: " << endl;
+	cin >> U;
+	cout << U;
 }
 
 Fraction::Fraction()
 {
-	numer = den = integ = 0;
+	this->integ = 0;
+	this->den = 1;
+	this->numer = 0;
 }
-
 Fraction::Fraction(int integ)
 {
-	numer = den = 0;
 	this->integ = integ;
+	this->numer = 0;
+	this->den = 1;
+}
+Fraction::Fraction(int numer, int den)
+{
+	this->integ = 0;
+	this->numer = numer;	
+	Set_den(den);
+}
+Fraction::Fraction(int integ, int numer, int den)
+{
+	this->integ = integ;
+	this->numer = numer;
+	Set_den(den);
+}
+Fraction::Fraction(const Fraction& other)
+{
+	this->integ = other.integ;
+	this->den = other.den;
+	this->numer = other.numer;
 }
 
-Fraction::Fraction(int den, int numer)
+Fraction& Fraction::operator = (const Fraction& other)
 {
+	this->integ = other.integ;
+	this->numer = other.numer;
+	this->den = other.den;
+	return *this;
+}
+Fraction& Fraction::operator *= (const Fraction& other)
+{
+	return *this = *this * other;
+}
+Fraction& Fraction::operator /= (const Fraction & other)
+{
+	return *this = *this / other;
+}
+Fraction& Fraction::operator += (const Fraction& other)
+{
+	return *this = *this + other;
+}
+Fraction& Fraction::operator -= (const Fraction& other)
+{
+	return *this = *this - other;
+}
+
+Fraction& Fraction::operator ++()
+{
+	to_proper();
+	integ++;
+	return *this;
+}
+Fraction  Fraction::operator ++(int)
+{
+	to_proper();
+	Fraction old = *this;
+	integ++;
+	return old;
+}
+Fraction& Fraction::operator --()
+{
+	to_proper();
+	integ--;
+	return *this;
+}
+Fraction  Fraction::operator --(int)
+{
+	to_proper();
+	Fraction old = *this;
+	integ--;
+	return old;
+}
+
+int  Fraction::Get_integ() const
+{
+	return integ;
+}
+int  Fraction::Get_numer() const
+{
+	return numer;
+}
+int  Fraction::Get_den() const
+{
+	return den;
+}
+void Fraction::Set_integ(int integ)
+{
+	this->integ = integ;
+}
+void Fraction::Set_numer(int numer)
+{
+	this->numer = numer;
+}
+void Fraction::Set_den(int den)
+{
+	if (den == 0)den = 1;
+	this->den = den;
+}
+void Fraction::Print() const
+{
+	if (integ) cout << integ;
+	if (numer)
+	{
+		if (integ) cout << "(";
+		cout << numer << "/" << den;
+		if (integ) cout << ")";
+	}
+	else if (integ == 0)cout << 0;
+	cout << endl;
+}
+
+Fraction& Fraction::to_improper()  //убираем целую часть
+{
+	numer += integ *den;
 	integ = 0;
-	this->den = den;
-	this->numer = numer;
-	
-}
-
-Fraction::Fraction(int integ, int den, int numer)
-{
-	this->integ = integ;
-	this->den = den;
-	this->numer = numer;
-}
-
-Fraction::Fraction(const Fraction & other)
-{
-	this->integ = other.integ;
-	this->den = other.den;
-	this->numer = other.numer;
-}
-
-void Fraction::GetIntDenNum() const
-{
-	cout << "Целое число равно: " <<this->integ << endl;
-	cout << "Знаменатель равен: " <<this->den << endl;
-	cout << "Числитель равен  : " <<this->numer << endl;
-}
-
-void Fraction::SetIntDenNum(int integ,int den,int numer)
-{
-	this->integ = integ;
-	this->den = den;
-	this->numer = numer;
-}
-
-Fraction& Fraction:: Transformation()
-{
-	if (this->den == this->numer)
-	{
-			this->integ++;
-			this->den = 0;
-			this->numer = 0;
-	}
-
-	if (this->integ == 0)
-	{
-		if (this->den > this->numer)
-		{
-
-			if (this->numer != 1)
-			{
-				this->integ = (this->den / this->numer) + this->integ;
-				this->den = this->den - this->numer;
-				this->numer = this->numer;
-
-				if (this->den > this->numer)
-				{
-					this->den = this->den - this->numer;
-					this->numer = this->numer;
-				}
-			}
-
-			if (this->numer == 1)
-			{
-				this->integ = this->den / this->numer;
-				this->den = 0;
-				this->numer = 0;
-			}
-
-			if (this->den == this->numer)
-			{
-				this->den = 0;
-				this->numer = 0;
-			}
-		}
-	}
 	return *this;
 }
-
-Fraction& Fraction :: operator =(const Fraction& other)
+Fraction& Fraction::to_proper()
 {
-	this->integ = other.integ;
-	this->den = other.den;
-	this->numer = other.numer;
+	integ += numer / den;
+	numer %=den;
 	return *this;
 }
-
-Fraction Fraction :: operator +(const Fraction& other)
+Fraction& Fraction::reduce()
 {
-	Fraction temp;
-	if (this->integ != 0 || other.integ != 0)        // Cмешанные числа
+	int more, less, rest;
+	if (numer > den)more = numer, less = den;
+	else less = numer, more = den;
+	do
 	{
-		if (this->numer == other.numer)
-		{
-			temp.integ = this->integ + other.integ;
-			temp.den = this->den + other.den;
-			temp.numer = this->numer;
-		}
-		if (this->den == 0 || this->numer == 0)     //сложение целых чисел и правильной дроби
-		{
-			temp.integ = this->integ;
-			temp.den = other.den;
-			temp.numer = other.numer;
-		}
+		rest = more % less;
+		more = less;
+		less = rest;
+	} while (rest);
 
-		if (this->den == 0 && this->numer == 0)    //cложение целого и смешанного числа
-		{
-			temp.integ = this->integ + other.integ;
-			temp.den = other.den;
-			temp.numer = other.numer;
-		}
-
-		if (this->integ != 0 && other.integ != 0)
-		{
-			temp.integ = this->integ + other.integ; //сложение смешанных чисел
-			temp.den = ((this->den * other.numer) + (this->numer * other.den));
-			temp.numer = (this->numer * other.numer);
-		}
-	}
-
-
-	if (this->integ == 0 && other.integ == 0)         //Действия с дробями
-	{
-		if (this->numer == other.numer)               // Сложение дробей с одинаковыми знаменателями
-		{
-			temp.den = this->den + other.den;
-			temp.numer = this->numer;
-		}
-
-		if (this->numer!=other.numer)                  // Сложение дробей с разными знаменателями
-		{
-			temp.den = ((this->den * other.numer) + (this->numer * other.den));
-		    temp.numer = (this->numer * other.numer);
-			
-		}
-
-		return temp;
-	}
+	int GCD = more;
+	numer /= GCD;
+	den /= GCD;
+	return *this;
+}
+Fraction  Fraction::inverted()const
+{
+	Fraction inverted = *this;
+	inverted.to_improper();
+	inverted.numer ^= inverted.den;
+	inverted.den ^= inverted.numer;
+	inverted.numer ^= inverted.den;
+	return inverted;
 }
 
-Fraction Fraction :: operator -(const Fraction& other)
+Fraction operator *( Fraction left, Fraction right)
 {
-	Fraction temp;
-	if (this->integ != 0 || other.integ != 0)        // Cмешанные числа
-	{
-		if (this->numer == other.numer)
+	left.to_improper();
+	right.to_improper();
+	return Fraction
+	(
+		left.Get_numer() * right.Get_numer(),
+		left.Get_den() * right.Get_den()
+	).to_proper().reduce();
+}
+Fraction operator /(const Fraction left, const Fraction right)
+{
+	return left * right.inverted();
+}
+Fraction operator +(const Fraction left,const Fraction right)
+{
+	return Fraction
+	(
+		left.Get_integ() + right.Get_integ(),
+		left.Get_numer() * right.Get_den() + left.Get_den() * right.Get_numer(),
+		left.Get_den() * right.Get_den()
+	).to_proper().reduce();
+}
+Fraction operator -(const Fraction left, const Fraction right)
+{
+	    int more, less, rest, num1, num2;
+		if (left.Get_den() > right.Get_den()) more =left.Get_den(), less = right.Get_den();
+		else less = left.Get_den(), more = right.Get_den();
+		do
 		{
-			temp.integ = this->integ - other.integ;
-			temp.den = this->den - other.den;
-			temp.numer = this->numer;
-		}
-		if (this->den == 0 || this->numer == 0)       //вычитание целых чисел и правильной дроби
+			rest = more % less;
+			more = less;
+			less = rest;
+		} while (rest);
+        more;
+		num1 = left.Get_den() / more;
+		num2 = right.Get_den() / more;
+		
+		if (num2 * left.Get_numer() < num1 * right.Get_numer());
 		{
-			temp.integ = this->integ;
-			temp.den = other.den;
-			temp.numer = other.numer;
+			return Fraction
+			(
+				(left.Get_integ() - right.Get_integ()) - 1,
+				(left.Get_numer() * num2 + (left.Get_den() * num2)) - (right.Get_numer() * num1),
+				left.Get_den() * num2
+			).reduce();
 		}
 
-		if (this->den == 0 && this->numer == 0)       //вычитание целого и смешанного числа
+		if (num2 * left.Get_numer() >= num1 * right.Get_numer());
 		{
-			temp.integ = this->integ + other.integ;
-			temp.den = other.den;
-			temp.numer = other.numer;
+			return Fraction
+			(
+				left.Get_integ() - right.Get_integ(),
+				(left.Get_numer() * num2) - (right.Get_numer() * num1),
+				left.Get_den() * num2
+			).reduce();
 		}
-
-		if (this->integ != 0 && other.integ != 0)
-		{
-			temp.integ = this->integ - other.integ;   //вычитание смешанных чисел
-			temp.den = ((this->den * other.numer) - (this->numer * other.den));
-			temp.numer = (this->numer * other.numer);
-		}
-	}
-
-
-	if (this->integ == 0 && other.integ == 0)         //Действия с дробями
-	{
-		if (this->numer == other.numer)               // Вычитание дробей с одинаковыми знаменателями
-		{
-			temp.den = this->den - other.den;
-			temp.numer = this->numer;
-		}
-
-		if (this->numer != other.numer)               // Вычиатние дробей с разными знаменателями
-		{
-			if (other.numer % this->numer)
-			{
-				temp.den = ((this->den * other.numer) - (this->numer * other.den));
-				temp.numer = (this->numer * other.numer);
-			}
-
-			if (other.numer % this->numer)
-			{
-				temp.den = ((this->den * other.numer) - (this->numer * other.den));
-				temp.numer = (this->numer * other.numer);
-			}
-
-			if (this->numer % other.numer)
-			{
-				temp.den = ((this->den * other.numer) - (this->numer * other.den));
-				temp.numer = (this->numer * other.numer);
-			}
-		}
-	}
-	return temp;
+		
+		
+}
+bool operator ==(Fraction left, Fraction right)
+{
+	return left.Get_integ() == right.Get_integ() && left.Get_numer() == right.Get_numer() && left.Get_den() == right.Get_den();
+}
+bool operator !=(Fraction left, Fraction right)
+{
+	return !(left.Get_integ() == right.Get_integ() && left.Get_numer() == right.Get_numer() && left.Get_den() == right.Get_den());
+}
+bool operator >(Fraction left, Fraction right)
+{ 
+	if (left.Get_integ() > right.Get_integ())  return true;
+	if (left.Get_integ() == right.Get_integ()) return left.Get_den() > right.Get_den();
+	if (left.Get_integ() == right.Get_integ() && left.Get_den() == right.Get_den()) return left.Get_numer() > right.Get_numer();
+	else return false;
+}
+bool operator <(Fraction left, Fraction right)
+{
+	if (left.Get_integ() < right.Get_integ())  return true;
+	if (left.Get_integ() == right.Get_integ()) return left.Get_den() < right.Get_den();
+	if (left.Get_integ() == right.Get_integ() && left.Get_den() == right.Get_den()) return left.Get_numer() < right.Get_numer();
+	else return false;
+}
+bool operator >=(Fraction left, Fraction right)
+{
+	if (left.Get_integ() > right.Get_integ())  return true;
+	if (left.Get_integ() == right.Get_integ() && left.Get_den() > right.Get_den()) return true;
+	if (left.Get_integ() == right.Get_integ() && left.Get_den() == right.Get_den() && left.Get_numer() > right.Get_numer()) return true;
+	if (left.Get_integ() == right.Get_integ() && left.Get_den() == right.Get_den() && left.Get_numer() == right.Get_numer()) return true;
+	else return false;
+}
+bool operator <=(Fraction left, Fraction right)
+{
+	if (left.Get_integ() < right.Get_integ())  return true;
+	if (left.Get_integ() == right.Get_integ() && left.Get_den() < right.Get_den()) return true;
+	if (left.Get_integ() == right.Get_integ() && left.Get_den() == right.Get_den() && left.Get_numer() < right.Get_numer()) return true;
+	if (left.Get_integ() == right.Get_integ() && left.Get_den() == right.Get_den() && left.Get_numer() == right.Get_numer()) return true;
+	else return false;
 }
 
-Fraction Fraction :: operator /(const Fraction& other)
+std::ostream& operator<<(std::ostream& os, const Fraction obj)
 {
-	Fraction temp;
-	if (this->integ != 0 || other.integ != 0)        //Cмешанные числа
+	if (obj.Get_integ())os << obj.Get_integ();
+	if (obj.Get_numer())
 	{
-		if (this->integ != 0 && other.integ == 0)    //Умножение дроби на число
-		{
-			temp.den = this->integ * other.numer;
-			temp.numer = other.den;
-		}
+		if (obj.Get_integ())os << "(";
+		os << obj.Get_numer() << "/" << obj.Get_den();
+		if (obj.Get_integ()) os << ")";
 	}
-
-
-	if (this->integ == 0 && other.integ == 0)
+	else if (obj.Get_integ() == 0) os << 0;
+	return os;
+}
+std::istream& operator>>(std::istream& is,Fraction &obj)
+{
+	int integ;
+	int den;
+	int numer;
+	if (is >> integ >> numer >> den)
 	{
-		temp.den = this->den * other.numer;
-		temp.numer = this->numer * other.den;
+	    obj.Set_integ(integ);
+		obj.Set_numer(numer);
+		obj.Set_den(den);
 	}
-	return temp;
+	return is;
 }
 
-Fraction Fraction :: operator *(const Fraction& other)
-{
-	Fraction temp;
-	if (this->integ != 0 || other.integ != 0)        //Cмешанные числа
-	{
-		if (this->integ == 0 && other.integ != 0)    //Умножение дроби на число
-		{
-			temp.den = this->den * other.integ;
-			temp.numer = this->numer;
-		}
-
-		if (this->integ != 0 && other.integ == 0)    //Умножение дроби на число
-		{
-			temp.den = this->integ * other.den;
-			temp.numer = other.numer;
-		}
-	}
 
 
-	if (this->integ == 0 && other.integ == 0)
-	{
-		temp.den = this->den * other.den;
-		temp.numer = this->numer * other.numer;
-	}
-	return temp;
-}
+
+
