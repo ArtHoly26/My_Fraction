@@ -1,8 +1,6 @@
 ﻿#include <iostream>
 using namespace std;
 
-
-
 class Fraction;
 Fraction operator *(Fraction left, Fraction right);
 Fraction operator /(const Fraction left, const Fraction right);
@@ -22,7 +20,7 @@ class Fraction
 public:
 
 	Fraction();
-	Fraction(int integ);
+	explicit Fraction(int integ);
 	Fraction(int numer, int den);
 	Fraction(int integ, int numer, int den);
 	Fraction(const Fraction& other);
@@ -49,6 +47,9 @@ public:
 	Fraction& operator --();
 	Fraction  operator --(int);
 
+	explicit operator int();
+	operator double();
+
 private:
 	int integ;
 	int numer;
@@ -58,103 +59,8 @@ private:
 int main()
 {
 	setlocale(LC_ALL, "Rus");
-	cout << "Арифметические операторы:" << endl;
-	Fraction A{ 5, 1, 5 };
-	Fraction B{ 3, 2, 7 };
-	Fraction C{ 2, 2, 3 };
-	Fraction D{ 5, 3, 5 };
-	Fraction R{ 5, 3, 5 };
-	Fraction U;
-	Fraction E = A + B;
-	cout << "Операция +" << endl;
-	E.Print();
-	Fraction F = D - C;
-	cout << "Операция -" << endl;
-	F.Print();
-	Fraction H = A * B;
-	cout << "Операция *" << endl;
-	H.Print();
-	Fraction L = D / C;
-	cout << "Операция /" << endl;
-	L.Print();
-	cout << "Операторы присваивания: " << endl;
-	cout << "Операция =" << endl;
-	Fraction M = D;
-	M.Print();
-	cout << "Операция *=" << endl;
-	M *= D;
-	M.Print();
-	cout << "Операция /=" << endl;
-	M /= D;
-	M.Print();
-	cout << "Операция +=" << endl;
-	M += D;
-	M.Print();
-	cout << "Операция -=" << endl;
-	M -= D;
-	M.Print();
-	cout << "Increment / Decrement(++ / --)" << endl;
-	for (Fraction i{ 1,2,5}; i < 10; i++) cout << i << "\t";
-	cout << endl;
-	for (Fraction i{ 1,2,5}; i < 10; ++i) cout << i << "\t";
-	cout << endl;
-	for (Fraction i{ 10,2,5 }; i > 0; i--) cout << i << "\t";
-	cout << endl;
-	for (Fraction i{ 10,2,5 }; i > 0; --i) cout << i << "\t";
-	cout << endl;
-	cout << "Операторы сравнения: " << endl;
-	cout << "Оператор ==" << endl;
-	bool check1 = D == R;
-	cout << check1;
-	cout << endl;
-	bool check2 = A == B;
-	cout << check2;
-	cout << endl;
-	cout << "Оператор !=" << endl;
-	bool check3 = D != R;
-	cout << check3;
-	cout << endl;
-	bool check4 = A != B;
-	cout << check4;
-	cout << endl;
-	cout << "Оператор >" << endl;
-	bool check5 = A > B;
-	cout << check5;
-	cout << endl;
-	bool check6 = B > A;
-	cout << check6;
-	cout << endl;
-	cout << "Оператор <" << endl;
-	bool check7 = B < A;
-	cout << check7;
-	cout << endl;
-	bool check8 = A < B;
-	cout << check8;
-	cout << endl;
-	cout << "Оператор >=" << endl;
-	bool check9 = D >= R;
-	cout << check9;
-	cout << endl;
-	bool check10 = A >= B;
-	cout << check10;
-	cout << endl;
-	bool check11 = B >= A;
-	cout << check11;
-	cout << endl;
-	cout << "Оператор <=" << endl;
-	bool check12 = D <= R;
-	cout << check12;
-	cout << endl;
-	bool check13 = A <= B;
-	cout << check13;
-	cout << endl;
-	bool check14 = B <= A;
-	cout << check14;
-	cout << endl;
-	cout << "Оператор >> <<" << endl;
-	cout << "Введите дробь: " << endl;
-	cin >> U;
-	cout << U;
+	Fraction L = (Fraction)2.75;
+	cout << L << endl;
 }
 
 Fraction::Fraction()
@@ -167,7 +73,7 @@ Fraction::Fraction(int integ)
 {
 	this->integ = integ;
 	this->numer = 0;
-	this->den = 1;
+	this->den = 0;
 }
 Fraction::Fraction(int numer, int den)
 {
@@ -441,6 +347,15 @@ std::istream& operator>>(std::istream& is,Fraction &obj)
 	return is;
 }
 
+Fraction::operator int()
+{
+	to_proper();
+	return integ;
+}
+Fraction::operator double()
+{
+	return integ+(double)numer/den;
+}
 
 
 
