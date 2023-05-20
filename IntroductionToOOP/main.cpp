@@ -23,6 +23,7 @@ public:
 	explicit Fraction(int integ);
 	Fraction(int numer, int den);
 	Fraction(int integ, int numer, int den);
+	Fraction(double decimal);
 	Fraction(const Fraction& other);
 	int Get_integ()const;
 	int Get_den()const;
@@ -59,7 +60,7 @@ private:
 int main()
 {
 	setlocale(LC_ALL, "Rus");
-	Fraction L = (Fraction)2.75;
+	Fraction L = 2.75;
 	cout << L << endl;
 }
 
@@ -86,6 +87,14 @@ Fraction::Fraction(int integ, int numer, int den)
 	this->integ = integ;
 	this->numer = numer;
 	Set_den(den);
+}
+Fraction::Fraction(double decimal)
+{
+	this->integ = decimal;
+	decimal -= integ;
+	den = 1e9;
+	numer = decimal * den;
+	reduce();
 }
 Fraction::Fraction(const Fraction& other)
 {

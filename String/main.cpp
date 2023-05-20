@@ -30,12 +30,10 @@ public:
 	{
 		delete[] this->str;
 	}
-
 	char* Get_Str()const
 	{
 		return str;
 	}
-
 	String& operator = (const String& other)
 	{
 		if (this -> str != nullptr) delete[] str;
@@ -47,30 +45,29 @@ public:
 
 		return *this;
 	}
-	String operator + (const String &other)
-	{
-		String newStr;
-		int size1 = strlen(this->str);
-		int size2 = strlen(other.str);
-		newStr.str = new char[size1+size2 + 1];
-
-		int i = 0;
-		for (; i < size1; i++)
-		{
-			newStr.str[i] = this->str[i];
-		}
-		
-		for (int j = 0; j<size2; j++, i++)
-		{
-			newStr.str[i] = other.str[j];
-		}
-		newStr.str[size1 + size2] = '\0';
-
-		return newStr;	
-	}
 };
 
+String operator + (const String left ,const String right)
+{
+	String newStr;
+	int size1 = strlen(left.Get_Str());
+	int size2 = strlen(right.Get_Str());
+	newStr = new char[size1 + size2 + 1];
 
+	int i = 0;
+	for (; i < size1; i++)
+	{
+		newStr.Get_Str()[i] = left.Get_Str()[i];
+	}
+
+	for (int j = 0; j < size2; j++, i++)
+	{
+		newStr.Get_Str()[i] = right.Get_Str()[j];
+	}
+	newStr.Get_Str()[size1 + size2] = '\0';
+
+	return newStr;
+}
 std::ostream& operator<<(std::ostream& os, const String &obj)
 {
 	os << obj.Get_Str();
@@ -86,7 +83,4 @@ int main()
 	cout << str2 << endl;
 	String str3 = str1 + str2;
 	cout << str3 << endl;
-
-
-	
 }
