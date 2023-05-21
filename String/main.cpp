@@ -3,6 +3,7 @@ using namespace std;
 
 class String;
 String operator + (const String left, const String right);
+std::ostream& operator << (std::ostream& os, const String& obj);
 
 class String
 {
@@ -43,6 +44,16 @@ public:
 		return str;
 	}
 
+	String& operator = (String&& moved)
+	{
+		if (&moved!=this)
+		{
+			delete[] str;
+			str = moved.str;
+			moved.str = nullptr;
+		}
+		return *this;
+	}
 	String& operator = (const String& other)
 	{
 		if (this -> str != nullptr) delete[] str;
@@ -88,4 +99,7 @@ int main()
 	String str3 = str1 + str2;
 	cout << str3 << endl;
 	str1 += str2;
+	String hello;
+	hello=String{ "Hello World" };
+	cout << hello << endl;
 }
