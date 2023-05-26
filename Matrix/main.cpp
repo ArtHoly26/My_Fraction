@@ -1,4 +1,4 @@
-#include <iostream>
+п»ї#include <iostream>
 
 using namespace std;
 
@@ -209,7 +209,7 @@ T    Determinant(Matrix<T>& mat)
 {
 	T det = 0;
 	int degree = 1;
-	if (mat.GetRows() < 1) cout << "Определитель вычислить невозможно!" << endl;
+	if (mat.GetRows() < 1) cout << "РћРїСЂРµРґРµР»РёС‚РµР»СЊ РІС‹С‡РёСЃР»РёС‚СЊ РЅРµРІРѕР·РјРѕР¶РЅРѕ!" << endl;
 	if (mat.GetRows() == 1) return mat.GetMatrix(0, 0);
 	if (mat.GetRows() == 2) return mat.GetMatrix(0, 0) * mat.GetMatrix(1, 1) - (mat.GetMatrix(1, 0) * mat.GetMatrix(0, 1));
 
@@ -278,12 +278,12 @@ Matrix<T> InversMatrix(Matrix<T>& mat)
 template <typename T>
 void   Check(Matrix<T> left, Matrix<T> right)
 {
-	if (left.GetRows() != right.GetRows() || left.GetCols() != right.GetRows()) throw exception("Матрицы разной размерности!");
+	if (left.GetRows() != right.GetRows() || left.GetCols() != right.GetRows()) throw exception("РњР°С‚СЂРёС†С‹ СЂР°Р·РЅРѕР№ СЂР°Р·РјРµСЂРЅРѕСЃС‚Рё!");
 }
 template <typename T>
 void   Check2(Matrix<T> mat)
 {
-	if (Determinant(mat) == 0) throw exception("Обратной матрицы не существует!");
+	if (Determinant(mat) == 0) throw exception("РћР±СЂР°С‚РЅРѕР№ РјР°С‚СЂРёС†С‹ РЅРµ СЃСѓС‰РµСЃС‚РІСѓРµС‚!");
 }
 
 int main()
@@ -298,10 +298,10 @@ int main()
 	arr.PrintMatrix();
 	cout << endl;
 	brr.PrintMatrix();
-	cout << "Определитель матрицы A: " << Determinant(arr) << endl;
-	cout << "Определитель матрицы B: " << Determinant(brr) << endl;
+	cout << "РћРїСЂРµРґРµР»РёС‚РµР»СЊ РјР°С‚СЂРёС†С‹ A: " << Determinant(arr) << endl;
+	cout << "РћРїСЂРµРґРµР»РёС‚РµР»СЊ РјР°С‚СЂРёС†С‹ B: " << Determinant(brr) << endl;
 	cout << endl;
-	cout << "Обратная матрица A: " << endl;
+	cout << "РћР±СЂР°С‚РЅР°СЏ РјР°С‚СЂРёС†Р° A: " << endl;
 	cout << InversMatrix(arr) << endl;
 	crr = arr / brr;
 	cout << crr << endl;
